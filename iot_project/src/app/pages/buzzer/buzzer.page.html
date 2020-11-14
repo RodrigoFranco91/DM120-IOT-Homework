@@ -3,12 +3,11 @@
     <ion-buttons slot="start">
       <ion-icon name="arrow-back" style="font-size: 2rem;" (click)="goBack()"></ion-icon>
     </ion-buttons>
-    <ion-title>Temperatura</ion-title>
+    <ion-title>Buzzer</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
   <div *ngIf="isLoading" style="text-align: center; margin-top: 50%;">
     <ion-spinner style="width: 80px; height: 80px;"></ion-spinner>
     <p>Carregando</p>
@@ -16,15 +15,11 @@
   <div *ngIf="!isLoading">
     <ion-card>
       <ion-card-content style="text-align: center; font-size: 5rem;">
-        {{dweet._with[0].content.temperatura}} ºC
+        Status:{{dweet._with[0].content.status_buzzer =="0" ? 'Desligado' : 'Ligado'}}
       </ion-card-content>
     </ion-card>
 
     <div style="text-align: center;">
-      <p>
-        <ion-icon name="thermometer" color="secondary"></ion-icon> Min: {{dweet._with[0].content.tempMin}} ºC &nbsp;
-        <ion-icon name="thermometer" color="secondary"></ion-icon> Max: {{dweet._with[0].content.tempMax}} ºC
-      </p>
       <p>
         <ion-icon name="calendar" color="primary"></ion-icon>
         {{dweet._with[0].date}}
@@ -36,6 +31,4 @@
     </div>
     <chart [options]="options" style="display: block;" type="chart"></chart>
   </div>
-
-
 </ion-content>

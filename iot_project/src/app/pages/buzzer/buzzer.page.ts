@@ -3,19 +3,18 @@ import { Router } from '@angular/router';
 import { DweetService } from 'src/app/services/dweet.service';
 import Dweet from 'src/models/Dweet';
 
+
 @Component({
-  selector: 'app-temperature',
-  templateUrl: './temperature.page.html',
-  styleUrls: ['./temperature.page.scss'],
+  selector: 'app-buzzer',
+  templateUrl: './buzzer.page.html',
+  styleUrls: ['./buzzer.page.scss'],
 })
-export class TemperaturePage implements OnInit {
+export class BuzzerPage implements OnInit {
 
   private dweet: Dweet
   private isLoading: boolean = true;
   private time: any;
   private dataPlot: Array<any>
-  private dataMaxPlot: Array<any>
-  private dataMinPlot: Array<any>
   options: Object;
 
 
@@ -26,8 +25,6 @@ export class TemperaturePage implements OnInit {
 
   private getLastDweets() {
     this.dataPlot = []
-    this.dataMaxPlot = []
-    this.dataMinPlot = []
     this.dweetService.loadLastDweets().subscribe(
       data => {
         this.preencherDweet(data)
@@ -48,14 +45,11 @@ export class TemperaturePage implements OnInit {
   private loadDataForPlot(dweet: Dweet) {
     for (let _with of dweet.with) {
       let epoch = new Date(_with.created).getTime()
-      this.dataPlot.push([epoch, _with.content.$temperatura])
-      this.dataMaxPlot.push([epoch, _with.content.$tempMax])
-      this.dataMinPlot.push([epoch, _with.content.$tempMin])
+      this.dataPlot.push([epoch, _with.content.$status_buzzer])
     }
   }
 
   private plotChart() {
-
     this.options = {
       xAxis: {
         type: 'datetime'
@@ -63,24 +57,14 @@ export class TemperaturePage implements OnInit {
       yAxis: {
         labels: {
           formatter: function () {
-            return this.value + "ºC";
+            return this.value + "";
           }
         },
       },
-      title: { text: 'Temperatura ' },
+      title: { text: 'Buzzer ' },
       series: [{
-        name: 'temperatura',
+        name: 'Buzzer',
         data: this.dataPlot.reverse(),
-        pointInterval: 60 * 60
-      },
-      {
-        name: 'temperatura máxima',
-        data: this.dataMaxPlot.reverse(),
-        pointInterval: 60 * 60
-      },
-      {
-        name: 'temperatura minima',
-        data: this.dataMinPlot.reverse(),
         pointInterval: 60 * 60
       }]
     };

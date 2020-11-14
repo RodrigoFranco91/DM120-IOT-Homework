@@ -4,11 +4,11 @@ import { DweetService } from 'src/app/services/dweet.service';
 import Dweet from 'src/models/Dweet';
 
 @Component({
-  selector: 'app-temperature',
-  templateUrl: './temperature.page.html',
-  styleUrls: ['./temperature.page.scss'],
+  selector: 'app-luminosidade',
+  templateUrl: './luminosidade.page.html',
+  styleUrls: ['./luminosidade.page.scss'],
 })
-export class TemperaturePage implements OnInit {
+export class LuminosidadePage implements OnInit {
 
   private dweet: Dweet
   private isLoading: boolean = true;
@@ -48,14 +48,13 @@ export class TemperaturePage implements OnInit {
   private loadDataForPlot(dweet: Dweet) {
     for (let _with of dweet.with) {
       let epoch = new Date(_with.created).getTime()
-      this.dataPlot.push([epoch, _with.content.$temperatura])
-      this.dataMaxPlot.push([epoch, _with.content.$tempMax])
-      this.dataMinPlot.push([epoch, _with.content.$tempMin])
+      this.dataPlot.push([epoch, _with.content.$luminosidade])
+      this.dataMaxPlot.push([epoch, _with.content.$lumMax])
+      this.dataMinPlot.push([epoch, _with.content.$lumMin])
     }
   }
 
   private plotChart() {
-
     this.options = {
       xAxis: {
         type: 'datetime'
@@ -63,23 +62,23 @@ export class TemperaturePage implements OnInit {
       yAxis: {
         labels: {
           formatter: function () {
-            return this.value + "ºC";
+            return this.value + "Lux";
           }
         },
       },
-      title: { text: 'Temperatura ' },
+      title: { text: 'Luminosidade ' },
       series: [{
-        name: 'temperatura',
+        name: 'luminosidade',
         data: this.dataPlot.reverse(),
         pointInterval: 60 * 60
       },
       {
-        name: 'temperatura máxima',
+        name: 'luminosidade máxima',
         data: this.dataMaxPlot.reverse(),
         pointInterval: 60 * 60
       },
       {
-        name: 'temperatura minima',
+        name: 'luminosidade mínima',
         data: this.dataMinPlot.reverse(),
         pointInterval: 60 * 60
       }]
