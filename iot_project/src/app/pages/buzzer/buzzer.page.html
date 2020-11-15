@@ -15,7 +15,10 @@
   <div *ngIf="!isLoading">
     <ion-card>
       <ion-card-content style="text-align: center; font-size: 5rem;">
-        Status:{{dweet._with[0].content.status_buzzer =="0" ? 'Desligado' : 'Ligado'}}
+        <span *ngIf="dweet._with[0].content.status_buzzer == false">Status: <span
+            style="color: red;">Desligado</span></span>
+        <span *ngIf="dweet._with[0].content.status_buzzer == true">Status: <span
+            style="color: green;">Ligado</span></span>
       </ion-card-content>
     </ion-card>
 
