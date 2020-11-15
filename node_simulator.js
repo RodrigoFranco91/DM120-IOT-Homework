@@ -1,7 +1,6 @@
 const https = require('http')
 
 const thing_name = "DM120_ABC"
-
 var temperatura = 0, tempMax = 0, tempMin = 999;
 var umidade = 0, umidMax = 0, umidMin = 999;
 var luminosidade = 0, lumMax = 0, lumMin = 999;
@@ -11,11 +10,11 @@ var current_color = 'red'
 
 function postToDweet() {
 
-    status_buzzer = Math.floor(Math.random() * 2) ? true : false;    
+    status_buzzer = Math.floor(Math.random() * 2) ? true : false;
     current_color = colors[(Math.floor(Math.random() * 3))]
 
     temperatura = Math.floor(Math.random() * 40) + 1;
-    
+
     if (temperatura < tempMin) {
         tempMin = temperatura;
     }
