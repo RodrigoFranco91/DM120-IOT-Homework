@@ -45,7 +45,13 @@ export class BuzzerPage implements OnInit {
   private loadDataForPlot(dweet: Dweet) {
     for (let _with of dweet.with) {
       let epoch = new Date(_with.created).getTime()
-      this.dataPlot.push([epoch, _with.content.$status_buzzer])
+      let statusBuzzer;
+      if (_with.content.$status_buzzer) {
+        statusBuzzer = 1;
+      } else {
+        statusBuzzer = 0;
+      }
+      this.dataPlot.push([epoch, statusBuzzer])
     }
   }
 

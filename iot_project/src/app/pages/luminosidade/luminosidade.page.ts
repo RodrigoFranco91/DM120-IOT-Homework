@@ -62,7 +62,7 @@ export class LuminosidadePage implements OnInit {
       yAxis: {
         labels: {
           formatter: function () {
-            return this.value + "Lux";
+            return this.value + "%";
           }
         },
       },
